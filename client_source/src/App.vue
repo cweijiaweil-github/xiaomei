@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="loading-layer" v-if="true">
-      <img class="loading" src='./assets/loading.gif' />
+      
     </div>
     <section id="nav-section" class="hero is-primary">
       <div class="hero-head">
