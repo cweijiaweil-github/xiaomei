@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="loading-layer" v-if="isLoading">
+    <div class="loading-layer" v-if="false">
       <img class="loading" src='./assets/loading.gif' />
     </div>
     <section id="nav-section" class="hero is-primary">
@@ -24,7 +24,7 @@ export default {
   name: 'App',
   computed: {
     isLoading () {
-      return true
+      return this.$store.getters.getIsLoading
     }
   }
 }
