@@ -9,17 +9,9 @@ exports.getDialogue = function(req, res, next) {
         input: req.body.input
     };
     Rx.Observable.fromPromise(conversationServ.getConversation(context)).flatMap(pContext => {
-        if (!pContext.input.source) {
-            return null;
-        } else {
-            return Rx.Observable.of(pContext);
-        }
+        return Rx.Observable.of(pContext);
     }).flatMap(pContext => {
-        if (!pContext.input.source) {
-            return null;
-        } else {
-            return Rx.Observable.of(pContext);
-        }
+        return Rx.Observable.of(pContext);
     }).flatMap(pContext => {
         return Rx.Observable.fromPromise(cloudantServ.insertHistory(pContext));
     }).map(pContext => {
