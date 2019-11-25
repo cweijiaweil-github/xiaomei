@@ -1,6 +1,5 @@
 var common = require('../utils/common');
 var constants = require('../utils/constants.json');
-var conversationServ = require('../services/conversation-serv');
 var Rx = require('rxjs/Rx');
 
 exports.getDialogue = function(req, res, next) {
@@ -8,15 +7,5 @@ exports.getDialogue = function(req, res, next) {
     var context = {
         input: req.body.input
     };
-    Rx.Observable.fromPromise(conversationServ.getConversation(context)).flatMap(pContext => {
-        return Rx.Observable.of(pContext);
-    }).flatMap(pContext => {
-        return Rx.Observable.of(pContext);
-    }).flatMap(pContext => {
-        return Rx.Observable.fromPromise(cloudantServ.insertHistory(pContext));
-    }).map(pContext => {
-        res.json(pContext.input);
-    }).catch(err => {
-        res.status(500).send(err);
-    }).subscribe();
+   
 }
