@@ -19,23 +19,6 @@ exports.getConversation = function(pContext) {
                 text: input.question
             }
         };
-        assistant.message(payload, function(err, data) {
-            if (err) {
-                console.error(err);
-                reject(err);
-            } else {
-                var input = pContext.input;
-                input.context = data.context;
-                if (data.output.next_step === constants.conversation_step.answer) {
-
-                } else if (data.output.next_step === constants.conversation_step.contact) {
-                    pContext.qa = data.output.go_qa;
-                } else {
-                    input.answer = data.output.text.join();
-                    input.source = '1';
-                }
-                resolve(pContext);
-            }
-        });
+       
     });
 };
