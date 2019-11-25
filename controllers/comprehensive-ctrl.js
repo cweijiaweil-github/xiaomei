@@ -8,4 +8,15 @@ exports.getDialogue = function(req, res, next) {
         input: req.body.input
     };
    
+    Rx.Observable.fromPromise(conversationServ.getConversation(context)).flatMap(pContext => {
+        if (!pContext.input.source) {
+            return Rx.Observable.fromPromise(nlcServ.getClassifier(pContext));
+        } else {
+            return Rx.Observable.of(pContext);
+        }
+    }).map(pContext => {
+        res.json(pContext.input);
+    }).catch(err => {
+        res.status(500).send(err);
+    }).subscribe();
 }
